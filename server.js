@@ -35,11 +35,12 @@ let FX_CACHE = {
 // Refresh interval (4 hours in milliseconds)
 const REFRESH_INTERVAL = 4 * 60 * 60 * 1000; // 4 hours
 
-// Enable CORS for all origins (adjust in production)
+// Enable CORS for all origins (for Figma Publish and local development)
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://your-frontend-domain.com', 'https://expand-trend-44478751.figma.site'],
+  origin: true, // Allow all origins (safe for public read-only cache)
   methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-API-Key']
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-API-Key'],
+  credentials: false
 }));
 
 app.use(express.json());
