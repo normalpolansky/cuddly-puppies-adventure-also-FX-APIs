@@ -1,4 +1,4 @@
-# Moonwave Backend Proxy
+# Backend Proxy
 
 A secure Express.js backend service for Yahoo Finance API access and FX cache management.
 
@@ -112,7 +112,7 @@ Body: {
 - ✅ Data validation (checks required fields and structure)
 - ✅ Automatic local backup before write
 - ✅ Timestamped backup history (keeps last 10)
-- ✅ Optional remote upload to data.moonwave.pro
+- ✅ Optional remote upload to data.pro
 - ✅ Rollback capability via backups
 
 **Example Response:**
