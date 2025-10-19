@@ -196,10 +196,10 @@ app.get('/api/yahoo-v7/:symbol', async (req, res) => {
       });
     }
     
-    // Process last 8 days of data
-    const processedData = timestamps.slice(-8).map((timestamp, index) => ({
+    // Process last 10 days of data
+    const processedData = timestamps.slice(-10).map((timestamp, index) => ({
       date: new Date(timestamp * 1000).toISOString().split('T')[0],
-      close: closes[closes.length - 8 + index]
+      close: closes[closes.length - 10 + index]
     })).filter(item => item.close !== null && !isNaN(item.close));
     
     console.log(`📊 [PROXY-V7] Successfully processed ${processedData.length} data points for ${symbol}`);
@@ -267,18 +267,18 @@ const refreshFXCache = async () => {
     const usdjpy1DData = usdjpy1DRes.data?.chart?.result?.[0];
     const usdjpy1DTimestamps = usdjpy1DData?.timestamp || [];
     const usdjpy1DCloses = usdjpy1DData?.indicators?.quote?.[0]?.close || [];
-    FX_CACHE.usdjpy1D = usdjpy1DTimestamps.slice(-8).map((timestamp, index) => ({
+    FX_CACHE.usdjpy1D = usdjpy1DTimestamps.slice(-10).map((timestamp, index) => ({
       date: new Date(timestamp * 1000).toISOString().split('T')[0],
-      close: usdjpy1DCloses[usdjpy1DCloses.length - 8 + index]
+      close: usdjpy1DCloses[usdjpy1DCloses.length - 10 + index]
     })).filter(item => item.close !== null && !isNaN(item.close));
     
     // Process DXY 1D
     const dxy1DData = dxy1DRes.data?.chart?.result?.[0];
     const dxy1DTimestamps = dxy1DData?.timestamp || [];
     const dxy1DCloses = dxy1DData?.indicators?.quote?.[0]?.close || [];
-    FX_CACHE.dxy1D = dxy1DTimestamps.slice(-8).map((timestamp, index) => ({
+    FX_CACHE.dxy1D = dxy1DTimestamps.slice(-10).map((timestamp, index) => ({
       date: new Date(timestamp * 1000).toISOString().split('T')[0],
-      close: dxy1DCloses[dxy1DCloses.length - 8 + index]
+      close: dxy1DCloses[dxy1DCloses.length - 10 + index]
     })).filter(item => item.close !== null && !isNaN(item.close));
     
     // Process USDJPY 4H (using 1h data, filtering to 4h intervals)
