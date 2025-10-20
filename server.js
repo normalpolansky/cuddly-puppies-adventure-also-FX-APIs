@@ -114,10 +114,10 @@ app.get('/api/yahoo/:symbol', async (req, res) => {
         close: closes[index]
       })).filter(item => item.close !== null && !isNaN(item.close));
     } else {
-      // For daily data, return last 10 days in simplified format
-      processedData = timestamps.slice(-10).map((timestamp, index) => {
+      // For daily data, return last 14 days in simplified format
+      processedData = timestamps.slice(-14).map((timestamp, index) => {
         const date = new Date(timestamp * 1000).toISOString().split('T')[0];
-        const close = closes[closes.length - 10 + index];
+        const close = closes[closes.length - 14 + index];
         return { date, close };
       }).filter(item => item.close !== null && !isNaN(item.close));
     }
